@@ -1,4 +1,4 @@
-import 'package:annotations/annotations.dart';
+import 'annotations.dart';
 
 part 'profile_model.g.dart';
 
