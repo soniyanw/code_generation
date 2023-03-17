@@ -35,6 +35,7 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE. */
 
+import 'package:example/profile_model.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -60,6 +61,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  ProfileModelGen profile = ProfileModelGen();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   borderRadius: BorderRadius.circular(100)),
               child: Center(
                   child: Text(
-                '?',
+                profile.name.substring(0, 1),
                 style: TextStyle(
                     fontSize: 72,
                     color: Colors.green[100],
@@ -98,7 +101,29 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [], // TODO Display the values in the map
+              children: [
+                for (String key in profile.variables.keys.toList())
+                  RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                        text: '$key: '.toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      TextSpan(
+                        text: '${profile.variables[key]}',
+                        style: TextStyle(
+                          fontSize: 36,
+                          color: Colors.green[200],
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ]),
+                  )
+              ],
             )
           ],
         ),
